@@ -1,4 +1,4 @@
-package search;
+package ru.sfedu.search_engine.search;
 
 public class Levenshtein {
     public static int distance(String a, String b) {
