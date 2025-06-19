@@ -1,6 +1,7 @@
 package ru.sfedu.search_engine.index;
 
 import ru.sfedu.search_engine.model.Product;
+import ru.sfedu.search_engine.utils.SplitUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ public class Index {
     private final Map<String, List<Product>> index = new HashMap<>();
 
     public void addProduct(Product product) {
-        for (String word : product.getWords()) {
+        for (String word : SplitUtil.getWords(product.name())) {
             List<Product> list = index.get(word);
             if (list == null) {
                 list = new ArrayList<>();

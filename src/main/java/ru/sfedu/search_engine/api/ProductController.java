@@ -8,13 +8,16 @@ import ru.sfedu.search_engine.search.BKTree;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
+import ru.sfedu.search_engine.utils.SplitUtil;
 
 @RestController
 @RequestMapping("/")
 public class ProductController {
     private final Searcher searcher;
+    private final ProductRepository repository;
 
     public ProductController(ProductRepository repository) {
+        this.repository = repository;
         List<Product> products = repository.findAll();
 
         Index index = new Index();
@@ -22,11 +25,19 @@ public class ProductController {
 
         for (Product product : products) {
             index.addProduct(product);
-            for (String word : product.getWords())
+            for (String word : SplitUtil.getWords(product.name()))
                 bkTree.add(word);
         }
 
         this.searcher = new Searcher(index, bkTree);
+    }
+
+    @PostMapping("/products")
+    public void addProduct(@RequestBody Product product) {
+        repository.save(product);
+        searcher.index().addProduct(product);
+        for (String word : SplitUtil.getWords(product.name()))
+            searcher.bkTree().add(word);
     }
 
     @GetMapping("/search")
@@ -34,6 +45,6 @@ public class ProductController {
             @RequestParam String query,
             @RequestParam(defaultValue = "1") int maxDistance) {
 
-        return searcher.search(query.toLowerCase(), maxDistance);
+        return searcher.search(query, maxDistance);
     }
 }
