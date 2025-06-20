@@ -24,7 +24,7 @@ public record Searcher(Index index, BKTree bkTree) {
                 continue;
             }
 
-            List<String> corrections = bkTree.search(word, maxDistance);
+            List<String> corrections = bkTree.find(word, maxDistance);
             for (String corrected : corrections)
                 for (Product product : index.search(corrected))
                     results.add(new ProductSearchResult(corrected, product.id(), product.name(), product.price()));

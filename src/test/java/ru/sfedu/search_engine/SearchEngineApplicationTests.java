@@ -24,15 +24,17 @@ class SearchEngineApplicationTests {
 	@Autowired
 	private ProductRepository repository;
 
+	private final long ID = 998L;
+
     @BeforeAll
 	void setup() throws Exception {
-        final String PRODUCT_JSON = """
-                {
-                	"id": 998,
-                	"name": "Электрогитара",
-                	"price": 4599.5
-                }
-                """;
+		final String PRODUCT_JSON = String.format("""
+        {
+            "id": %d,
+            "name": "Электрогитара",
+            "price": 4599.5
+        }
+        """, ID);
         mockMvc.perform(post("/products")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(PRODUCT_JSON))
@@ -62,6 +64,6 @@ class SearchEngineApplicationTests {
 
 	@AfterAll
 	void cleanup() {
-		repository.deleteById(998L);
+		repository.deleteById(ID);
 	}
 }
