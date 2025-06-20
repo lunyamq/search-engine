@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SplitUtil {
+    // just split words
     public static List<String> getWords(String src) {
         List<String> words = new ArrayList<>();
         StringBuilder sb = new StringBuilder();

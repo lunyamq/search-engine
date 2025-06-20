@@ -43,6 +43,7 @@ class SearchEngineApplicationTests {
 
 	@Test
 	void testSearchExactMatch() throws Exception {
+		// exact match
 		mockMvc.perform(get("/search")
 						.param("query", "электрогитара")
 						.param("maxDistance", "0")
@@ -54,6 +55,7 @@ class SearchEngineApplicationTests {
 
 	@Test
 	void testSearchWithTypo() throws Exception {
+		// search w/ type-error
 		mockMvc.perform(get("/search")
 						.param("query", "электрагетара")
 						.param("maxDistance", "2")

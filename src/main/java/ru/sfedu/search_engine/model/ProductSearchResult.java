@@ -18,6 +18,6 @@ public record ProductSearchResult(String correctedWord, Long productId, String p
 
     @Override
     public String toString() {
-        return String.format("[Исправлено: '%s'] %s: %s", correctedWord, productId, productName);
+        return String.format("[Исправлено: '%s'] %s - %s", correctedWord, productId, productName);
     }
 }

@@ -11,6 +11,7 @@ import java.util.Map;
 public class Index {
     private final Map<String, List<Product>> index = new HashMap<>();
 
+    // inverted index: maps each word to a list of products containing it
     public void addProduct(Product product) {
         for (String word : SplitUtil.getWords(product.name())) {
             List<Product> list = index.get(word);
@@ -23,6 +24,7 @@ public class Index {
         }
     }
 
+    // searches for all products containing the exact word
     public List<Product> search(String word) {
         List<Product> docs = index.get(word);
         return docs != null ? docs : List.of();

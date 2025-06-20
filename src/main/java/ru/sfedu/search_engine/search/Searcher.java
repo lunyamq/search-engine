@@ -17,6 +17,7 @@ public record Searcher(Index index, BKTree bkTree) {
 
         for (String word : SplitUtil.getWords(query.toLowerCase())) {
             List<Product> exactMatches = index.search(word);
+            // exact matches from inverted index
             if (!exactMatches.isEmpty()) {
                 for (Product product : exactMatches)
                     results.add((new ProductSearchResult(word, product.id(), product.name(), product.price())));
@@ -24,6 +25,7 @@ public record Searcher(Index index, BKTree bkTree) {
                 continue;
             }
 
+            // find similar words w/ bkTree
             List<String> corrections = bkTree.find(word, maxDistance);
             for (String corrected : corrections)
                 for (Product product : index.search(corrected))

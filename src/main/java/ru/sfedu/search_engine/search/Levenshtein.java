@@ -13,10 +13,10 @@ public class Levenshtein {
                     dp[i][j] = dp[i - 1][j - 1];
                 else {
                     dp[i][j] = 1 + Math.min(
-                            dp[i - 1][j],               // Удаление
+                            dp[i - 1][j],               // remove
                             Math.min(
-                                    dp[i][j - 1],       // Вставка
-                                    dp[i - 1][j - 1]    // Замена
+                                    dp[i][j - 1],       // insert
+                                    dp[i - 1][j - 1]    // replace
                             )
                     );
                 }

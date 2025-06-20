@@ -23,6 +23,7 @@ public class ProductController {
         Index index = new Index();
         BKTree bkTree = new BKTree();
 
+        // indexing && building bkTree
         for (Product product : products) {
             index.addProduct(product);
             for (String word : SplitUtil.getWords(product.name()))
@@ -32,6 +33,7 @@ public class ProductController {
         this.searcher = new Searcher(index, bkTree);
     }
 
+    // add new product && update index + bkTree
     @PostMapping("/products")
     public void addProduct(@RequestBody Product product) {
         repository.save(product);
@@ -40,6 +42,7 @@ public class ProductController {
             searcher.bkTree().add(word);
     }
 
+    // search product w/ type-error
     @GetMapping("/search")
     public List<ProductSearchResult> searchProducts(
             @RequestParam String query,

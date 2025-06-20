@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BKTree {
+    private Node root;
     private static class Node {
         final String word;
         final Map<Integer, Node> children = new HashMap<>();
@@ -14,6 +15,7 @@ public class BKTree {
             this.word = word;
         }
 
+        // recursive add by distance
         void add(String word) {
             int distance = Levenshtein.distance(this.word, word);
             Node child = children.get(distance);
@@ -23,6 +25,7 @@ public class BKTree {
                 child.add(word);
         }
 
+        // recursive search in maxDistance
         void find(String word, int maxDistance, List<String> results) {
             int distance = Levenshtein.distance(this.word, word);
             if (distance <= maxDistance)
@@ -35,9 +38,8 @@ public class BKTree {
             }
         }
     }
-    
 
-    private Node root;
+
 
     public void add(String word) {
         if (root == null)

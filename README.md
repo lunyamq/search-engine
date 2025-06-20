@@ -43,3 +43,32 @@ java -jar build/libs/search_engine-1.0.jar
 ### Расстояние Левенштейна (Levenshtein)
   Это классический алгоритм вычисления минимального количества операций (вставка, удаление, замена) 
   для преобразования одного слова в другое.
+  
+## Примеры API
+По умолчанию работает на http://localhost:8080
+### Добавление товара
+```http
+POST /products
+Content-Type: application/json
+
+{
+  "id": 998,
+  "name": "Электрогитара",
+  "price": 4599.5
+}
+```
+### Поиск товара
+```http
+GET /search?query=электрагетара&maxDistance=2
+```
+Пример ответа:
+```json
+[
+  {
+    "correctedWord": "электрогитара",
+    "productId": 998,
+    "productName": "Электрогитара",
+    "price": 4599.5
+  }
+]
+```
