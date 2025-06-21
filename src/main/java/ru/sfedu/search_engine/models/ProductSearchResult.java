@@ -1,4 +1,4 @@
-package ru.sfedu.search_engine.model;
+package ru.sfedu.search_engine.models;
 
 import java.util.Objects;
 
@@ -14,10 +14,5 @@ public record ProductSearchResult(String correctedWord, Long productId, String p
     @Override
     public int hashCode() {
         return Objects.hash(productId);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("[Исправлено: '%s'] %s - %s", correctedWord, productId, productName);
     }
 }

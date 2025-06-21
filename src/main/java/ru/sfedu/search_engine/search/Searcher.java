@@ -1,8 +1,8 @@
 package ru.sfedu.search_engine.search;
 
 import ru.sfedu.search_engine.index.Index;
-import ru.sfedu.search_engine.model.Product;
-import ru.sfedu.search_engine.model.ProductSearchResult;
+import ru.sfedu.search_engine.models.Product;
+import ru.sfedu.search_engine.models.ProductSearchResult;
 import ru.sfedu.search_engine.utils.SplitUtil;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public record Searcher(Index index, BKTree bkTree) {
         Set<ProductSearchResult> results = new HashSet<>();
 
         for (String word : SplitUtil.getWords(query.toLowerCase())) {
-            List<Product> exactMatches = index.search(word);
+            List<Product> exactMatches = index.getList(word);
             // exact matches from inverted index
             if (!exactMatches.isEmpty()) {
                 for (Product product : exactMatches)
@@ -28,7 +28,7 @@ public record Searcher(Index index, BKTree bkTree) {
             // find similar words w/ bkTree
             List<String> corrections = bkTree.find(word, maxDistance);
             for (String corrected : corrections)
-                for (Product product : index.search(corrected))
+                for (Product product : index.getList(corrected))
                     results.add(new ProductSearchResult(corrected, product.id(), product.name(), product.price()));
         }
 

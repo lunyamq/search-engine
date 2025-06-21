@@ -1,7 +1,7 @@
 package ru.sfedu.search_engine.api;
 
 import ru.sfedu.search_engine.index.Index;
-import ru.sfedu.search_engine.model.*;
+import ru.sfedu.search_engine.models.*;
 import ru.sfedu.search_engine.repository.ProductRepository;
 import ru.sfedu.search_engine.search.Searcher;
 import ru.sfedu.search_engine.search.BKTree;

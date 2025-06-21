@@ -1,6 +1,6 @@
 package ru.sfedu.search_engine.index;
 
-import ru.sfedu.search_engine.model.Product;
+import ru.sfedu.search_engine.models.Product;
 import ru.sfedu.search_engine.utils.SplitUtil;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class Index {
     }
 
     // searches for all products containing the exact word
-    public List<Product> search(String word) {
+    public List<Product> getList(String word) {
         List<Product> docs = index.get(word);
         return docs != null ? docs : List.of();
     }

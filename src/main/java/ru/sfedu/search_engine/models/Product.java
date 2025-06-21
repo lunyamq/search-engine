@@ -1,4 +1,4 @@
-package ru.sfedu.search_engine.model;
+package ru.sfedu.search_engine.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
